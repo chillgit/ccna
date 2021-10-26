@@ -35,3 +35,17 @@ show vlan brief
 
 
 -----------------------------------------------------------------------------
+
+Configure IP address for VLAN
+
+S1(config)#in(terface) v(lan) 1
+S1(config-if)#ip a(ddress) 172.17.99.11 255.255.255.0
+S1(config-if)#n(o) sh(utdown)
+
+
+conf t
+interface vlan 1
+ip address 172.17.99.11 255.255.255.0
+no shutdown
+
+
