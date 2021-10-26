@@ -1,0 +1,41 @@
+Enable port security on F0/5.
+
+S1(config)# in(terface) f0/5
+S1(config-if)# sh(utdown)
+S1(config-if)# sw(itchport) po(rt-security)
+S1(config-if)# sw(itchport) po(rt-security) mac(-address) xxxx.xxxx.xxxx
+eller
+S1(config-if)#sw(itchport) po(rt-security) mac(-address) s(ticky)
+S1(config-if)#no shutdown
+S1#sh(ow) po(rt-security) in(terface) f0/5
+S1#sh(ow) po(rt-security)
+S1#sh(ow) in(terface) st(atus)
+S1#sh(ow) in(terface) f0/5
+S1#sh(ow) po(rt-security) a(ddress)
+
+Note: Entering the switchport port-security command 
+sets the maximum MAC addresses to 1 and the violation 
+action to shutdown.
+
+set new mac-address on router
+R1(config)# in(terface) f0/5
+R1(config-if)#ma(c-address) xxxx.xxxx.xxxx
+
+
+
+conf t
+interface f0/5
+shutdown
+switchport port-security
+switchport port-security mac-address xxxx.xxxx.xxxx
+  eller
+switchport port-security mac-address sticky
+no shutdown
+show port-security interface f0/5
+show port-security
+show interface status
+show interface f0/5
+show port-security address
+
+
+
