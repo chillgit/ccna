@@ -1,0 +1,12 @@
+set default gateway
+
+S1(config)#ip de(fault-gateway) <ip-adr GW> 
+S1(config)#end
+S1#show vlan bri
+S1#show ip interface bri
+
+conf t
+ip default-gateway <ip-adr GW> 
+end
+show vlan bri
+show ip interface bri
