@@ -1,0 +1,34 @@
+-----------------------------------------------------------------------------
+
+Configure an EtherChannel with Cisco PAgP
+
+ALS1(config)# in(terface) r(ange) f0/11-12
+ALS1(config-if-range)# sh(utdown)
+ALS1(config-if-range)# channel-g(roup) 1 mode desirable
+*Creating a port-channel interface Port-channel 1
+ALS1(config-if-range)# no shutdown
+*<output omitted - interfaces logged as coming up>
+ALS1# sh(ow) et(herchannel) s(ummary)
+
+
+-----------------------------------------------------------------------------
+
+Configure an EtherChannel with IEEE 802.1AX LACP
+
+DLS1(config)# in(terface) r(ange) f0/7-8
+DLS1(config-if-range)# sh(utdown)
+<output omitted - interfaces logged as shutting down>
+DLS1(config-if-range)# channel-group 2 mode active
+Creating a port-channel interface Port-channel 2
+DLS1(config-if-range)# no shutdown
+ALS1# sh(ow) et(herchannel) s(ummary)
+
+
+conf t
+interface range f0/7-8
+shutdown
+channel-group 2 mode active
+no shutdown
+do show etherchannel summary
+
+-----------------------------------------------------------------------------
