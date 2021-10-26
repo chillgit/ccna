@@ -1,0 +1,37 @@
+-----------------------------------------------------------------------------
+
+Create VLAN
+
+S1(config)#vl(an) 10
+S1(config-vlan)#na(me) Data
+S1(config-vlan)#vlan 99
+S1(config-vlan)#name Management&Native
+S1(config-vlan)#vlan 999
+S1(config-vlan)#name BlackHole
+S1(config-vlan)#end
+S1#show vlan bri
+
+vlan 10
+name BlackHole
+end
+show vlan bri
+
+-----------------------------------------------------------------------------
+
+Assign VLAN to interface
+
+S1(config)#interface f0/6
+S1(config-if)#sw(itchport) m(ode) a(ccess)
+S1(config-if)#sw(itchport) a(ccess) v(lan) 99
+S1(config-if)#end
+S1#sh(ow) v(lan) b(rief)
+
+conf t
+interface f0/6
+switchport mode access
+switchport access vlan 99
+end
+show vlan brief
+
+
+-----------------------------------------------------------------------------
