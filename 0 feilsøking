@@ -1,6 +1,6 @@
 NB! shut/no shut + cop run st
 
-SWITCH
+ACCESS-SWITCH
 
 1
 Check VLANs
@@ -87,6 +87,10 @@ R1#show ac(cess-lists)
 show access-lists
 
 16
+check vrf
+R1#show vrf
+show vrf
+
 check mac address table
 R1#sh arp
 (etter ping)
