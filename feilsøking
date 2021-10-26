@@ -2,25 +2,34 @@ NB! shut/no shut + cop run st
 
 SWITCH
 
-ping
-
+1
 Check VLANs
 S1#sh(ow) vl(an)
 show vlan
 
+2
 check VLAN, duplex and ports
 S1#sh in st(atus)
 (check both sides are full-duplex and same speed)
 show interface status
 
+3
 Check trunk
 S1#sh(ow) in(terface) t(runk)
 show interface trunk
 
+4
+ping fra klient
+ping loopback address
+ping default gateway (router)
+ping remote server
+
+5
 Check default GW
 S1# show ip default-gateway
 show ip default-gateway
 
+6
 check port security
 S1# sh(ow) po(rt-security) i(nterface) f0/5
 eller
@@ -28,17 +37,20 @@ S1# sh(ow) po(rt-security) a(ddress)
 (hvis adressen har vÊrt feil, men nÂ er riktig mÂ en ta shutno shut for Â oppdatere og Âpne linken)
 show port-security
 
+7
 check etherchannel 
 S1# sh(ow) et(herchannel) s(ummary)
 eller
 S1#show etherchannel 1 summary
 show etherchannel summary
 
+8
 check mac address table
 S1#sh mac ad(dress-table)
 (etter ping)
 show mac address-table
 
+9
 Switch# show dhcp lease
 Viser hvilke DHCP lease enheter tilknyttet svitsjen har
 show dhcp lease
@@ -46,28 +58,35 @@ show dhcp lease
 
 RUTER
 
+10
 ping <ip> source <interface>
 
+11
 Check VLANs
 R1#sh(ow) vl(an)
 show vlan
 
+12
 check VLAN and ports
 R1#sh in st(atus)
 show interface status
 
+13
 Check trunk
 R1#sh(ow) in(terface) t(runk)
 show interface trunk
 
+14
 check routing table
 R1#show ip ro(ute)
 show ip route
 
+15
 check access list
 R1#show ac(cess-lists)
 show access-lists
 
+16
 check mac address table
 R1#sh arp
 (etter ping)
