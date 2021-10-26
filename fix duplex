@@ -1,0 +1,9 @@
+SW1# conf t
+SW1(config)# interface g0/1
+SW1(config-if)#
+
+---------------------
+
+conf t
+interface g0/1
+duplex full
