@@ -1,0 +1,14 @@
+Configure trunk port
+
+S2(config)#in(terface) f0/1
+S2(config-if)#sw(itchport) m(ode) t(runk)
+S2(config-if)#do sh(ow) in(terface) t(runk)
+evt.
+S2(config-if)#sw(itchport) t(runk) a(llowed) v(lan) 10,99
+
+
+interface f0/1
+switchport mode trunk
+do show interface trunk
+evt.
+switchport trunk allowed vlan 10,99
