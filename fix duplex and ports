@@ -1,0 +1,26 @@
+------------------------------------------
+
+duplex
+
+SW1# conf t
+SW1(config)# interface g0/1
+SW1(config-if)# duplex full
+
+
+
+conf t
+interface g0/1
+duplex full
+
+------------------------------------------
+
+open ports (no shut)
+
+S1(config)#in(terface) f0/1
+S1(config-if)#no shutdown
+
+conf t
+interface f0/1
+no shutdown
+
+------------------------------------------
