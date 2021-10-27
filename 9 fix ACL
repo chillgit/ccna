@@ -1,0 +1,54 @@
+
+-----------------------------------------------------------------------------
+
+Configure the ACL on R3 (Using 1 for the access list number)
+
+R3(config)# access-list 1 remark Allow R1 LANs Access
+R3(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R3(config)# access-list 1 permit 192.168.20.0 0.0.0.255
+R3(config)# access-list 1 deny any
+
+
+conf t
+access-list 1 remark Allow R1 LANs Access
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 permit 192.168.20.0 0.0.0.255
+access-list 1 deny any
+
+-----------------------------------------------------------------------------
+
+Apply the ACL to the appropriate interface in the proper direction.
+
+R3(config)# interface g0/0/0
+R3(config-if)# ip access-group 1 out
+
+
+conf t
+interface g0/0/0
+ip access-group 1 out
+
+-----------------------------------------------------------------------------
+
+Verify a numbered ACL.
+
+R3# show access-list 1
+
+R3# show ip interface g0/0
+
+-----------------------------------------------------------------------------
+
+Configure a named standard ACL.
+
+R1(config)# ip ac(cess-list) s(tandard) BRANCH-OFFICE-POLICY
+R1(config-std-nacl)# p(ermit) h(ost) 192.168.30.3
+R1(config-std-nacl)# p(ermit) 192.168.40.0 0.0.0.255
+R1(config-std-nacl)# end
+
+
+conf t
+ip access-list standard BRANCH-OFFICE-POLICY
+permit host 192.168.30.3
+permit 192.168.40.0 0.0.0.255
+end
+
+-----------------------------------------------------------------------------
