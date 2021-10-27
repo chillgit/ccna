@@ -9,6 +9,8 @@ show vlan
 
 2
 check VLAN, duplex and ports
+Sjekk ogsÂ om bÂde switch og PC stÂr pÂ
+Auto Duplex og Auto Speed. Disse mÂ vÊre like begge steder.
 S1#sh in st(atus)
 (check both sides are full-duplex and same speed)
 show interface status
