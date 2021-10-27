@@ -3,12 +3,33 @@ Configure trunk port
 S2(config)#in(terface) f0/1
 S2(config-if)#sw(itchport) m(ode) t(runk)
 S2(config-if)#do sh(ow) in(terface) t(runk)
-evt.
-S2(config-if)#sw(itchport) t(runk) a(llowed) v(lan) 10,99
 
 
 interface f0/1
 switchport mode trunk
 do show interface trunk
-evt.
+
+-----------------------------------------------------------------------------
+
+Allow VLANS on trunk port 
+(Only allow VLAN 10 and 99)
+
+S1(config)#interface f0/1	
+S1(config-if)#switchport trunk allowed vlan 10,99
+S1(config-if)#end
+S1#show interface trunk
+
+
 switchport trunk allowed vlan 10,99
+
+-----------------------------------------------------------------------------
+
+Change native VLAN for trunk port
+
+S1#config t 
+S1(config)#interface f0/1 
+S1(config-if)#switchport trunk native vlan 99 
+S1#show interface trunk 
+S1#show interface f0/1 switchport
+
+-----------------------------------------------------------------------------
