@@ -1,0 +1,37 @@
+-----------------------------------------------------------------------------
+
+ Create VRF
+R1(config)# ip vrf *REDvrf*
+
+-----------------------------------------------------------------------------
+
+assign interfaces to the VRFs.
+R1(config)#int gi0/0.10
+R1(config-if)# ip vrf forwarding REDvrf
+
+the IP address was removed from the interface, so we have to set the IP-address again.
+R1(config)#int gi0/0.10
+R1(config-if)# ip address 10.10.10.1 255.255.255.0
+
+R1# sh ip vrf int
+
+To ping with VRF, use the following command:
+R1# ping vrf REDvrf 10.1.1.2
+
+telnet
+R1# telnet 10.1.1.2 /vrf REDvrf
+
+R1# ssh -vrf REDvrf 10.1.1.2 -l admin
+
+static vrf route
+R1(config)# ip route vrf REDvrf 10.11.11.0 255.255.255.0 10.1.1.2
+
+-----------------------------------------------------------------------------
+
+Verify connectivity from routers.
+You can also specify a source interface or an IP-address, but the IP-address (and interface) has to be one that the router has, and also in the VRF mentioned in command you typed.
+R1# ping vrf REDvrf 10.1.1.2 source 10.10.10.1
+eller
+R1# ping vrf REDvrf 10.1.1.2 source gi0/0.1
+
+-----------------------------------------------------------------------------
