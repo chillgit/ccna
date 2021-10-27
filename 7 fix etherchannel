@@ -21,6 +21,10 @@ DLS1(config-if-range)# sh(utdown)
 DLS1(config-if-range)# channel-group 2 mode active
 Creating a port-channel interface Port-channel 2
 DLS1(config-if-range)# no shutdown
+DLS1(config)#int port-channel 1
+DLS1(config-if)#sw mode trunk
+DLS1(config-if)#sw trunk allowed vlan 10,20
+DLS1(config-if)#no shutdown
 ALS1# sh(ow) et(herchannel) s(ummary)
 
 
@@ -28,6 +32,11 @@ conf t
 interface range f0/7-8
 shutdown
 channel-group 2 mode active
+no shutdown
+exit
+int port-channel 2
+sw mode trunk
+sw trunk allowed vlan 10,20
 no shutdown
 do show etherchannel summary
 
