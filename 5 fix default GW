@@ -2,11 +2,9 @@ set default gateway
 
 S1(config)#ip de(fault-gateway) <ip-adr GW> 
 S1(config)#end
-S1#show vlan bri
-S1#show ip interface bri
+S1#show ip default-gateway
 
 conf t
-ip default-gateway <ip-adr GW> 
+ip default-gateway 172.16.130.3 
 end
-show vlan bri
-show ip interface bri
+show ip default-gateway
