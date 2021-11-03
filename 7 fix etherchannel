@@ -26,7 +26,8 @@ DLS1(config-if)#switchport trunk encapsulation dot1q
 DLS1(config-if)#sw mode trunk
 DLS1(config-if)#sw trunk allowed vlan 10,20
 DLS1(config-if)#no shutdown
-ALS1# sh(ow) et(herchannel) s(ummary)
+DLS1#show interfaces trunk 
+DLS1# sh(ow) et(herchannel) s(ummary)
 
 
 conf t
@@ -42,6 +43,7 @@ no shutdown
 interface range e0/0-3
 no shutdown
 end 
+show interfaces trunk 
 show etherchannel summary
 
 -----------------------------------------------------------------------------
