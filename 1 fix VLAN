@@ -11,8 +11,9 @@ S1(config-vlan)#name BlackHole
 S1(config-vlan)#end
 S1#show vlan bri
 
-vlan 10
-name BlackHole
+conf t
+vlan 65
+name Users1
 end
 show vlan bri
 
