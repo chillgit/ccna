@@ -1,0 +1,20 @@
+On R1, you should configure OSPF process ID 1. Configure the router ID to 1.1.1.1. Include 
+all the networks that are associated with each of the three active interfaces for R1 in Area 0.
+
+R1# show ip ospf interface brief
+R1#show ip protocols
+
+On R1, enter the following commands:
+
+R1# configure terminal
+R1(config)# router ospf 1
+R1(config-router)# router-id 1.1.1.1
+R1(config-router)# network 10.0.1.0 0.0.0.255 area 0
+R1(config-router)# network 10.1.1.0 0.0.0.255 area 0
+R1(config-router)# network 10.10.11.0 0.0.0.255 area 0
+R1(config-router)# end
+
+During configuration, a syslog message indicates that new adjacencies have been initiated 
+with two neighbors, R2 and R3. The OSPF neighbor state is “FULL”, which means that they have 
+synchronized to each other and share the same LSDB knowledge. Note that R2 and R3 are 
+represented by the preconfigured router IDs, 2.2.2.2 and 3.3.3.3, respectively.
