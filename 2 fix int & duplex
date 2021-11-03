@@ -7,7 +7,7 @@ SW1(config)# interface g0/1
 SW1(config-if)# duplex full
 
 
-
+show interfaces FastEthernet0/13
 conf t
 interface g0/1
 duplex full
