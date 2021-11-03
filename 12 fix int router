@@ -7,10 +7,12 @@ R1(config)# in(terface) g0/0
 R1(config-if)# ip ad(dress)
 R1(config-if)# no shutdown
 
-show ip interface brief
+
 conf t
-interface g0/0
-ip address 172.16.130.3 255.255.255.0
+interface e0/0
+ip address 10.10.1.1 255.255.255.0
 no shutdown
+do show ip interface brief
+do show ip route
 
 -----------------------------------------------------------------------------
