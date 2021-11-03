@@ -21,6 +21,8 @@ S1#sh(ow) in(terface) t(runk)
 show interface trunk
 
 4
+SW1# show cdp neighbors
+SW1# show cdp neighbors detail
 ping fra klient
 ping loopback address
 ping default gateway (router)
@@ -71,7 +73,9 @@ show vlan
 12
 check VLAN and ports
 R1#sh in st(atus)
+R1# sh(ow) ip in(terface) br(ief)
 show interface status
+show ip interface brief
 
 13
 Check trunk
@@ -82,6 +86,8 @@ show interface trunk
 check routing table
 R1#show ip ro(ute)
 show ip route
+hvis rute mangler, sjekk om ospf er aktivert
+R1#show ip protocols
 
 15
 check access list
@@ -93,12 +99,16 @@ check vrf
 R1#show vrf
 show vrf
 
+17
 check mac address table
 R1#sh arp
 (etter ping)
 show arp
 
-
+18
+check open ports
+There are several open TCP ports: 22 for SSH, 23 for Telnet, 80 for HTTP, and 443 for HTTPS; as well as UDP port 123 for NTP.
+R1# show control-plane host open-ports
 
 
 
