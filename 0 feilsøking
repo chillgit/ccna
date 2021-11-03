@@ -5,7 +5,7 @@ ACCESS-SWITCH
 1
 Check VLANs
 S1#sh(ow) vl(an)
-show vlan
+show vlan b
 
 2
 check VLAN, duplex and ports
