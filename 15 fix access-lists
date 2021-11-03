@@ -5,20 +5,30 @@ ports: 22 for SSH, 23 for Telnet, 80 for HTTP, and 443 for HTTPS; as well as UDP
 R1#show ac(cess-lists)
 show access-lists
 
-onfigure the ACL on R3 (Using 1 for the access list number)
+Verify a numbered ACL.
+
+R3# show access-list 1
+
+R3# show ip interface g0/0
+
+-----------------------------------------------------------------------------
+
+
+Configure the ACL on R3 (Using 10 for the access list number)
 
 R3(config)# access-list 10 remark Allow R1 LANs Access
-R3(config)# access-list 10 permit 192.168.10.0 0.0.0.255
-R3(config)# access-list 10 permit 192.168.20.0 0.0.0.255
-R3(config)# access-list 10 deny any
+R3(config)# access-list 10 deny host 172.16.1.1
+R3(config)# access-list 10 permit 172.16.1.0 0.0.0.255
+R3(config)# access-list 10 deny 172.16.2.0 0.0.0.255
+R3(config)# access-list 10 allow any
 
 
 conf t
 access-list 10 remark Allow R1 LANs Access
-access-list 14 permit host 10.10.2.20
-access-list 20 permit 192.168.10.0 0.0.0.255
-access-list 30 permit 192.168.20.0 0.0.0.255
-access-list 40 deny any
+access-list 10 deny host 172.16.1.1
+access-list 10 permit 172.16.1.0 0.0.0.255
+access-list 10 deny 172.16.2.0 0.0.0.255
+access-list 10 permit any
 end 
 show access-lists
 
@@ -26,17 +36,19 @@ show access-lists
 
 Apply the ACL to the appropriate interface in the proper direction.
 
-R3(config)# interface g0/0/0
+R3(config)# interface e0/0
 R3(config-if)# ip access-group 10 out
 
 
 conf t
-interface e0/3
+interface e0/0
 ip access-group 10 out
 end
-
+show ip interface e0/0
 
 -----------------------------------------------------------------------------
+Create Extended ACL
+
 The first should deny all UDP traffic.
 The second should permit TCP traffic from PC1 to any destination as long as the destination port is 23 (Telnet).
 The third should deny all other TCP traffic from PC1.
@@ -56,6 +68,20 @@ R1(config-if)# ip access-group PC1_TELNET in
 R1(config-if)# end
 
 
+
+configure terminal
+ip access-list extended PING_31
+deny udp any any
+permit tcp host 10.10.1.10 any eq 23
+deny tcp host 10.10.1.10 any
+permit ip any any
+exit
+interface Ethernet 0/0
+ip access-group PC1_TELNET in
+end
+
+
+
 -----------------------------------------------------------------------------
 
 
@@ -68,13 +94,6 @@ R1(config-std-nacl)# no 20
 
 -----------------------------------------------------------------------------
 
-Verify a numbered ACL.
-
-R3# show access-list 1
-
-R3# show ip interface g0/0
-
------------------------------------------------------------------------------
 
 Configure a named standard ACL.
 
@@ -82,6 +101,28 @@ R1(config)# ip ac(cess-list) s(tandard) BRANCH-OFFICE-POLICY
 R1(config-std-nacl)# p(ermit) h(ost) 192.168.30.3
 R1(config-std-nacl)# p(ermit) 192.168.40.0 0.0.0.255
 R1(config-std-nacl)# end
+
+
+conf t
+ip access-list standard NAMED_ACL
+permit host 192.168.12.1
+permit 10.1.1.1 0.0.0.3
+permit 10.1.2.0 0.0.1.255
+end
+show access-lists
+-----------------------------------------------------------------------------
+
+Apply the ACL to the appropriate interface in the proper direction.
+
+R3(config)# interface e0/0
+R3(config-if)# ip access-group 10 out
+
+
+conf t
+interface e0/0
+ip access-group NAMED_ACL in
+end
+show ip interface e0/0
 
 -----------------------------------------------------------------------------
 
