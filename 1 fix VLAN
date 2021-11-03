@@ -12,8 +12,8 @@ S1(config-vlan)#end
 S1#show vlan bri
 
 conf t
-vlan 13
-name Users2
+vlan 65
+name Users
 end
 show vlan bri
 
