@@ -12,8 +12,8 @@ S1(config-vlan)#end
 S1#show vlan bri
 
 conf t
-vlan 65
-name Users1
+vlan 13
+name Users2
 end
 show vlan bri
 
@@ -28,9 +28,9 @@ S1(config-if)#end
 S1#sh(ow) v(lan) b(rief)
 
 conf t
-interface f0/6
+interface e0/1
 switchport mode access
-switchport access vlan 99
+switchport access vlan 65
 end
 show vlan brief
 
