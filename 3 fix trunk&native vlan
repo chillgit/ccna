@@ -1,13 +1,17 @@
 Configure trunk port
 
 S2(config)#in(terface) f0/1
+S2(config-if)#sw(itchport) t(runk) en(capsulation) d(ot1Q)
 S2(config-if)#sw(itchport) m(ode) t(runk)
 S2(config-if)#do sh(ow) in(terface) t(runk)
 
 conf t
 interface e0/3
+switchport trunk encapsulation dot1Q
 switchport mode trunk
-do show interface trunk
+no shut
+end
+show interface trunk
 
 -----------------------------------------------------------------------------
 
