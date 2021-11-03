@@ -1,0 +1,126 @@
+DHCP: UDP port number 67 is the destination port of a server, and UDP port number 68 is used by the client.
+ports: 22 for SSH, 23 for Telnet, 80 for HTTP, and 443 for HTTPS; as well as UDP port 123 for NTP.
+-----------------------------------------------------------------------------
+
+R1#show ac(cess-lists)
+show access-lists
+
+onfigure the ACL on R3 (Using 1 for the access list number)
+
+R3(config)# access-list 10 remark Allow R1 LANs Access
+R3(config)# access-list 10 permit 192.168.10.0 0.0.0.255
+R3(config)# access-list 10 permit 192.168.20.0 0.0.0.255
+R3(config)# access-list 10 deny any
+
+
+conf t
+access-list 10 remark Allow R1 LANs Access
+access-list 14 permit host 10.10.2.20
+access-list 20 permit 192.168.10.0 0.0.0.255
+access-list 30 permit 192.168.20.0 0.0.0.255
+access-list 40 deny any
+end 
+show access-lists
+
+-----------------------------------------------------------------------------
+
+Apply the ACL to the appropriate interface in the proper direction.
+
+R3(config)# interface g0/0/0
+R3(config-if)# ip access-group 10 out
+
+
+conf t
+interface e0/3
+ip access-group 10 out
+end
+
+
+-----------------------------------------------------------------------------
+The first should deny all UDP traffic.
+The second should permit TCP traffic from PC1 to any destination as long as the destination port is 23 (Telnet).
+The third should deny all other TCP traffic from PC1.
+The last should explicitly permit all IPv4 traffic.
+
+On R1, enter the following commands:
+R1# configure terminal
+R1(config)# ip access-list extended PC1_TELNET
+R1(config-ext-nacl)# deny udp any any
+R1(config-ext-nacl)# permit tcp host 10.10.1.10 any eq 23
+R1(config-ext-nacl)# deny tcp host 10.10.1.10 any
+R1(config-ext-nacl)# permit ip any any
+
+R1(config-ext-nacl)# exit
+R1(config)# interface Ethernet 0/0
+R1(config-if)# ip access-group PC1_TELNET in
+R1(config-if)# end
+
+
+-----------------------------------------------------------------------------
+
+
+Delete access
+
+R1# configure terminal
+R1(config)# ip access-list standard 10
+R1(config-std-nacl)# no 10
+R1(config-std-nacl)# no 20
+
+-----------------------------------------------------------------------------
+
+Verify a numbered ACL.
+
+R3# show access-list 1
+
+R3# show ip interface g0/0
+
+-----------------------------------------------------------------------------
+
+Configure a named standard ACL.
+
+R1(config)# ip ac(cess-list) s(tandard) BRANCH-OFFICE-POLICY
+R1(config-std-nacl)# p(ermit) h(ost) 192.168.30.3
+R1(config-std-nacl)# p(ermit) 192.168.40.0 0.0.0.255
+R1(config-std-nacl)# end
+
+-----------------------------------------------------------------------------
+
+ extended ping
+
+R1# ping
+Protocol [ip]:
+Target IP address: 192.168.30.3
+Repeat count [5]:
+Datagram size [100]:
+Timeout in seconds [2]:
+Extended commands [n]: y
+Source address or interface: 192.168.20.1
+
+-----------------------------------------------------------------------------
+
+ACL range permit. This permit ACE allows hosts 192.168.1.4 through 192.168.1.7, 
+by using the 0.0.0.3 wildcard, which is the inverse of a 255.255.255.252 
+subnet mask.
+
+R1(config-std-nacl)# permit host 192.168.1.3
+R1(config-std-nacl)# permit 192.168.1.4 0.0.0.3
+
+-----------------------------------------------------------------------------
+
+Apply named ACL to vty lines.
+
+R1(config)# line vty 0 15
+R1(config-line)# access-class ADMIN-MGT in
+R1(config-line)# exit
+
+-----------------------------------------------------------------------------
+ACL   Allow Web & SSH Access
+
+R1(config)# access-list 100 remark Allow Web & SSH Access
+R1(config)# access-list 100 permit tcp 192.168.10.0 0.0.0.255 any eq 80
+R1(config)# access-list 100 permit tcp host 192.168.10.2 eq 80 192.168.30.0 0.0.0.255
+R1(config)# access-list 100 permit tcp host 192.168.10.3 host 10.1.1.3 eq 22
+
+DHCP: UDP port number 67 is the destination port of a server, and UDP port number 68 is used by the client.
+ports: 22 for SSH, 23 for Telnet, 80 for HTTP, and 443 for HTTPS; as well as UDP port 123 for NTP.
+-----------------------------------------------------------------------------
