@@ -37,6 +37,7 @@ show ip default-gateway
 check port security
 S1# sh(ow) po(rt-security) i(nterface) f0/5
 eller
+S1# show port-security interface e0/1 address
 S1# sh(ow) po(rt-security) a(ddress)
 (hvis adressen har vÊrt feil, men nÂ er riktig mÂ en ta shutno shut for Â oppdatere og Âpne linken)
 show port-security
