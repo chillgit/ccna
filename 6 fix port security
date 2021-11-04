@@ -34,15 +34,15 @@ PC1 aabb.cc00.1100
 PC2 aabb.cc00.2300
 
 conf t
-interface e0/0
+interface e0/1
 shutdown
 switchport mode access
 switchport port-security
-switchport port-security mac-address aabb.cc01.1320
+switchport port-security mac-address aabb.cc01.1322
 
 no shutdown
 end
-show port-security interface e0/0
+show port-security interface e0/1
 show port-security
 show interface status
 show interface f0/5
@@ -65,7 +65,7 @@ SW1(config-if)# switchport port-security
 SW1(config-if)# end
 
 configure terminal
-interface e0/0
+interface e0/1
 no switchport port-security
 no switchport port-security mac-address aabb.cc01.1320
 switchport port-security maximum 2
