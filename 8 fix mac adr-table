@@ -1,2 +1,21 @@
+----------------------------------------------
 sh / no sh
 ping d gw
+
+----------------------------------------------
+change mac address
+
+PC1# configure terminal
+PC1(config)# interface Ethernet 0/0
+PC1(config-if)# mac-address eeee.eeee.eeee
+PC1(config-if)# end
+
+
+configure terminal
+interface e0/0
+mac-address eeee.eeee.eeee
+end
+show mac address-table
+
+----------------------------------------------
+sh / no sh
