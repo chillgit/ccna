@@ -1,6 +1,6 @@
 S1# sh(ow) po(rt-security) i(nterface) f0/5
 S1# sh(ow) po(rt-security) a(ddress)
-S1# show port-security interface e0/1 address
+S1# show port-security interface e0/0 address
 og
 show mac address-table
 
@@ -34,15 +34,15 @@ PC1 aabb.cc00.1100
 PC2 aabb.cc00.2300
 
 conf t
-interface e0/1
+interface e0/0
 shutdown
 switchport mode access
 switchport port-security
-switchport port-security mac-address aabb.cc00.1100
+switchport port-security mac-address aabb.cc01.1320
 
 no shutdown
 end
-show port-security interface e0/1
+show port-security interface e0/0
 show port-security
 show interface status
 show interface f0/5
@@ -56,7 +56,7 @@ switchport port-security mac-address sticky
 sticky, allow 2 addresses
 
 SW1# configure terminal
-SW1(config)# interface Ethernet 0/1
+SW1(config)# interface Ethernet 0/0
 SW1(config-if)# no switchport port-security
 SW1(config-if)# no switchport port-security mac-address aabb.cc00.0700
 SW1(config-if)# switchport port-security maximum 2
@@ -65,9 +65,9 @@ SW1(config-if)# switchport port-security
 SW1(config-if)# end
 
 configure terminal
-interface e0/1
+interface e0/0
 no switchport port-security
-no switchport port-security mac-address aabb.cc00.0700
+no switchport port-security mac-address aabb.cc01.1320
 switchport port-security maximum 2
 switchport port-security mac-address sticky
 switchport port-security
