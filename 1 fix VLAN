@@ -12,7 +12,7 @@ S1(config-vlan)#end
 S1#show vlan bri
 
 conf t
-vlan 65
+vlan 1501
 name Users
 end
 show vlan bri
@@ -28,9 +28,9 @@ S1(config-if)#end
 S1#sh(ow) v(lan) b(rief)
 
 conf t
-interface e0/1
+interface e0/0
 switchport mode access
-switchport access vlan 65
+switchport access vlan 1502
 end
 show vlan brief
 
@@ -45,8 +45,9 @@ S1(config-if)#n(o) sh(utdown)
 
 
 conf t
-interface vlan 1
-ip address 172.17.99.11 255.255.255.0
+interface vlan 1301
+ip address 4.1.1.0 255.255.255.248
 no shutdown
+end
 
 
