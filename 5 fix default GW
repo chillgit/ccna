@@ -5,6 +5,15 @@ S1(config)#end
 S1#show ip default-gateway
 
 conf t
-ip default-gateway 172.16.130.3 
+ip default-gateway 0.0.0.0
 end
 show ip default-gateway
+
+-----------------------------------
+
+default static route
+Router(config)# ip route 0.0.0.0 0.0.0.0 <ip-address>
+(ip-addressen til motstÂende ruter-interface som er koblet til ruteren)
+
+conf t
+ip route 0.0.0.0 0.0.0.0 5.2.3.65
