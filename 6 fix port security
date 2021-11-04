@@ -1,7 +1,16 @@
+S1# sh(ow) po(rt-security) i(nterface) f0/5
+S1# sh(ow) po(rt-security) a(ddress)
+S1# show port-security interface e0/1 address
+og
+show mac address-table
+
+-------------------------------------------------------------
+
 Enable port security on F0/5.
 
 S1(config)# in(terface) f0/5
 S1(config-if)# sh(utdown)
+S1(config-if)# sw(itchport) m(ode) a(ccess)
 S1(config-if)# sw(itchport) po(rt-security)
 S1(config-if)# sw(itchport) po(rt-security) mac(-address) xxxx.xxxx.xxxx
 eller
@@ -21,21 +30,96 @@ set new mac-address on router
 R1(config)# in(terface) f0/5
 R1(config-if)#ma(c-address) xxxx.xxxx.xxxx
 
-
+PC1 aabb.cc00.1100
+PC2 aabb.cc00.2300
 
 conf t
-interface f0/5
+interface e0/1
 shutdown
+switchport mode access
 switchport port-security
-switchport port-security mac-address xxxx.xxxx.xxxx
-  eller
-switchport port-security mac-address sticky
+switchport port-security mac-address aabb.cc00.1100
+
 no shutdown
-show port-security interface f0/5
+end
+show port-security interface e0/1
 show port-security
 show interface status
 show interface f0/5
 show port-security address
+
+
+  eller
+switchport port-security mac-address sticky
+
+------------------------------------------------------------
+sticky, allow 2 addresses
+
+SW1# configure terminal
+SW1(config)# interface Ethernet 0/1
+SW1(config-if)# no switchport port-security
+SW1(config-if)# no switchport port-security mac-address aabb.cc00.0700
+SW1(config-if)# switchport port-security maximum 2
+SW1(config-if)# switchport port-security mac-address sticky
+SW1(config-if)# switchport port-security
+SW1(config-if)# end
+
+configure terminal
+interface e0/1
+no switchport port-security
+no switchport port-security mac-address aabb.cc00.0700
+switchport port-security maximum 2
+switchport port-security mac-address sticky
+switchport port-security
+end
+copy running-config startup-config
+
+
+show port-security address
+
+------------------------------------------------------------
+
+(SW(config)# errdisable recovery cause cause):
+S1(config)# errdisable recovery cause psecure-violation
+
+(SW(config)# errdisable recovery interval seconds):
+S1(config)# errdisable recovery interval 30
+
+------------------------------------------------------------
+
+Port Security with Dynamic Learning and Protect Violation Mode
+
+the protect security violation mode drops all the packets from the 
+insecure hosts at the port-security process level but does not increment 
+the security-violation count.
+
+SW2# configure terminal
+SW2(config)# interface Ethernet 0/2
+SW2(config-if)# switchport mode access
+SW2(config-if)# switchport port-security violation protect
+SW2(config-if)# switchport port-security
+SW2(config-if)# end
+SW2# show port-security
+SW2# show port-security interface e0/2
+SW2# show port-security interface e0/2 address
+
+------------------------------------------------------------
+
+Port Security with Dynamic Learning and Restrict Violation Mode
+
+the restrict security violation mode drops all the packets from the 
+insecure hosts at the port-security process level and increments the 
+security-violation count.
+
+SW2# configure terminal
+SW2(config)# interface Ethernet 0/2
+SW2(config-if)# switchport port-security violation restrict
+SW2(config-if)# end
+SW2# show port-security
+SW2# show port-security interface e0/2
+SW2# show port-security interface e0/2 address
+
+
 
 
 
