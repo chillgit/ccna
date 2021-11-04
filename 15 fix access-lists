@@ -71,12 +71,11 @@ R1(config-if)# end
 
 configure terminal
 ip access-list extended PING_31
-deny udp any any
-permit tcp host 10.10.1.10 any eq 23
-deny tcp host 10.10.1.10 any
+permit icmp host 192.168.23.3 any
+deny icmp any any
 permit ip any any
 exit
-interface Ethernet 0/0
+interface Ethernet 0/1
 ip access-group PC1_TELNET in
 end
 
