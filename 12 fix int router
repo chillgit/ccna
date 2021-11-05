@@ -40,3 +40,8 @@ show ip interface brief
 
 -----------------------------------------------------------------------------
 
+set new mac-address on router
+
+R1(config)# in(terface) f0/5
+R1(config-if)#ma(c-address) xxxx.xxxx.xxxx
+
