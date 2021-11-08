@@ -45,3 +45,26 @@ set new mac-address on router
 R1(config)# in(terface) f0/5
 R1(config-if)#ma(c-address) xxxx.xxxx.xxxx
 
+configure terminal
+interface e0/0
+mac-address eeee.eeee.eeee
+end
+
+-----------------------------------------------------------------------------
+
+
+remove the configured MAC address from Ethernet0/0, returning it to its bia value, 
+with the no mac-address command. On PC1, enter the following commands:
+
+PC1# configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+PC1(config)# interface Ethernet 0/0
+PC1(config-if)# no mac-address
+PC1(config-if)# end
+
+configure terminal
+interface Ethernet 0/0
+no mac-address
+end
+
+
