@@ -16,6 +16,7 @@ R3# show ip interface g0/0
 
 Configure the ACL on R3 (Using 10 for the access list number)
 
+R3# configure terminal
 R3(config)# access-list 10 remark Allow R1 LANs Access
 R3(config)# access-list 10 deny host 172.16.1.1
 R3(config)# access-list 10 permit 172.16.1.0 0.0.0.255
