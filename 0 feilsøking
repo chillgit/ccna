@@ -65,6 +65,7 @@ RUTER
 
 10
 ping <ip> source <interface>
+sh ip helper
 
 11
 Check VLANs
@@ -112,9 +113,15 @@ There are several open TCP ports: 22 for SSH, 23 for Telnet, 80 for HTTP, and 44
 R1# show control-plane host open-ports
 
 
+19
+telnet/ssh
 
+ssh -l admin 10.10.1.1
+Password: Cisco123
+R1> logout
 
-
-
+ssh -l admin 10.10.1.1
+Cisco123
+logout
 
 
