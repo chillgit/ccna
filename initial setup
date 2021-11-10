@@ -1,0 +1,137 @@
+---------------------------------------------------------------------
+
+Switch
+
+Switch>
+Switch>en
+Switch#conf t
+Switch(config)#no ip domain-l(ookup)
+Switch(config)#h(ostname) S1
+S1(config)#ena s(ecret) cisco
+S1(config)#lin(e) c(onsole) 0
+S1(config-line)#logg(ing) s(ynchronous)
+S1(config-line)#exi
+S1(config)#lin(e) v(ty) 0 15
+S1(config-line)#login l(ocal)
+S1(config-line)#exi
+S1(config)#u(sername) admin s(ecret) cisco
+
+deaktiver ubrukte porter
+
+S1#sh ip int bri
+S1(config)#in(terface) r(ange) f0/2-24, gi0/2
+S1(config-if-range)#sh(utdown)
+S1(config-if-range)#end
+
+switch burde ha
+S1(config)#spa(nning-tree) m(ode) r(apid-pvst)
+
+alle interfaces som er koblet til endebruker (PC), aktiver spanning-tree portfast
+
+S1(config)#in(terface) f0/1
+S1(config-if)#sw(itchport) m(ode) a(ccess)
+S1(config-if)#spa(nning-tree) p(ortfast)
+
+S1#cop(y) r(unning-config) st(artup-config)
+
+
+
+en
+conf t
+no ip domain-l
+h S2
+ena s cisco
+lin c 0
+logg s
+exi
+lin v 0 15
+login l
+exi
+u admin s cisco
+spa m r
+
+alle interfaces som er koblet til endebruker (PC), aktiver spanning-tree portfast
+
+in f0/1
+sw m a
+spa p
+end
+cop r st
+
+
+
+---------------------------------------------------------------------
+
+Router
+
+R1>no
+R1>en
+R1#conf t
+R1(config)#no ip domain-l(ookup)
+R1(config)#h(ostname) R1
+R1#ena s(ecret) cisco
+R1#lin(e) c(onsole) 0
+R1(config-line)#logg(ing) s(ynchronous)
+R1(config-line)#exi
+R1(config)#lin(e) v(ty) 0 15
+R1(config-line)#login l(ocal)
+R1(config-line)#exi
+R1(config)#u(sername) admin s(ecret) cisco
+
+
+no
+
+en
+conf t
+no ip domain-l
+h R2
+ena s cisco
+lin c 0
+logg s
+exi
+lin v 0 15
+login l
+exi
+u admin s cisco
+
+-----------------------------------------------------------------------------
+
+Set IP for interface
+
+R1# conf t
+R1(config)# in(terface) g0/0
+R1(config-if)# ip ad(dress)
+R1# end
+
+conf t
+interface g0/0
+ip address 172.16.130.3 255.255.255.0
+no shutdown
+do show ip interface brief
+do show ip route
+
+
+-----------------------------------------------------------------------------
+
+Create subinterface on router
+
+R1(config)# interface g0/1
+R1(config-if)# no ip address
+R1(config)# in(terface) g0/1.10
+R1(config-subif)# en(capsulation) d(ot1Q) 10
+R1(config-subif)# ip ad(dress) 192.168.10.1 255.255.255.0
+R1(config-subif)# no shutdown
+R1(config-subif)# end
+R1# sh(ow) ip in(terface) br(ief)
+
+conf t
+interface e0/0
+no ip address
+interface g0/0.11
+encapsulation dot1Q 11
+ip address 10.11.11.1 255.255.255.0
+no shut
+end
+show ip interface brief
+
+-----------------------------------------------------------------------------
