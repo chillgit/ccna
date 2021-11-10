@@ -6,11 +6,26 @@ SW1# conf t
 SW1(config)# interface g0/1
 SW1(config-if)# duplex full
 
+conf t
+interface g0/1
+duplex full
+end
+sh interface g0/1
+
+------------------------------------------
+change speed
+
+SW1# conf t
+SW1(config)# interface g0/1
+SW1(config-if)# speed 1000
+
 
 show interfaces FastEthernet0/13
 conf t
 interface g0/1
-duplex full
+speed 1000
+end
+sh interface g0/1
 
 ------------------------------------------
 
