@@ -1,0 +1,15 @@
+Sett IP-helper på interfacet som mottar DHCP request, med helper-addresse som peker mot DHCP-server
+
+R1#conf t
+R1(config)#interface g0/1
+R1(config-if)#ip helper-address 10.0.0.1
+R1(config-if)#end
+R1#sh ip helper
+
+
+
+conf t
+interface g0/1
+ip helper-address 10.0.0.1
+end
+sh ip helper
