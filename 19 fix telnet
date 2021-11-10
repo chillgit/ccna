@@ -1,0 +1,127 @@
+----------------------------------------------------------------------------
+Configure telnet
+
+R1# configure terminal
+R1(config)# line console 0
+R1(config-line)# login
+R1(config-line)# password Console123
+R1(config-line)# end
+
+configure terminal
+line console 0
+login
+password Console123
+end
+
+
+
+----------------------------------------------------------------------------
+Control access to ssh/telnet using ACL
+
+define a new access list number 1 that permits PC1 (10.10.1.10) and 
+PC2 (10.10.1.20) and explicitly denies all other addresses with the log option enabled.
+On R1, enter the following commands:
+
+R1# configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)# access-list 1 permit 10.10.1.10
+R1(config)# access-list 1 permit 10.10.1.20
+R1(config)# access-list 1 deny any log
+
+Assign access list 1 to the vty lines in the inbound direction using the 
+access-class command, then leave the configuration mode.
+On R1, enter the following commands:
+
+R1(config)# line vty 0 4
+R1(config-line)# access-class 1 in
+R1(config-line)# end
+R1#
+
+
+configure terminal
+access-list 1 permit 10.10.1.10
+access-list 1 permit 10.10.1.20
+access-list 1 deny any log
+line vty 0 4
+access-class 1 in
+end
+
+----------------------------------------------------------------------------
+
+login to ssh remotely
+
+PC2> ssh -l admin 10.10.1.1
+Password: Cisco123
+R1> logout
+
+if access is denied, the device you tried to remotely log on to will show a syslog message
+
+ssh -l admin 10.10.1.1
+
+
+Cisco123
+logout
+
+----------------------------------------------------------------------------
+
+show access list to verify the match counters on each line.
+On R1, enter the following command:
+
+show access-lists 1
+
+
+(When an ACL is applied to the vty lines with the access-class command, 
+each successful connection will increment the match counter on the associated 
+permit statement by two while each rejected connection will only increment 
+the match counter on the associated deny statement by one.
+
+
+----------------------------------------------------------------------------
+
+encrypt password (dårlig kryptering)
+
+S1(config)#se(rvice) p(assword-encryption)
+
+conf t
+service password-encryption
+end
+
+----------------------------------------------------------------------------
+
+add a password to the five vty lines (line vty 0 4), setting the credential 
+that is required for remote access to the CLI of R1 to VTYPass
+
+R1# configure terminal
+R1(config)# line vty 0 4
+R1(config-line)# login
+R1(config-line)# password VTYPass
+R1(config-line)# end
+
+configure terminal
+line vty 0 4
+login
+password VTYPass
+end
+
+
+----------------------------------------------------------------------------
+
+Open up for both telnet and SSH
+
+R1# configure terminal
+R1(config)# line vty 0 4
+R1(config-line)# transport input all
+R1(config-line)# end
+
+
+configure terminal
+line vty 0 4
+transport input all
+end
+
+
+
+
+
+
+
