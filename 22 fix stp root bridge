@@ -1,0 +1,51 @@
+
+-------------------------------------------------------------------------------------
+
+Configure a primary and secondary root bridge for all existing VLANs
+
+S2(config)# spanning-tree vlan 1,10,99 root primary
+S2(config)# spanning-tree mode rapid-pvst
+
+conf t
+spanning-tree vlan 1,10,99 root primary
+spanning-tree mode rapid-pvst
+end
+
+----
+
+S1(config)# spanning-tree vlan 1,10,99 root secondary
+S1(config)# spanning-tree mode rapid-pvst
+S1(config)# interface f0/6               interface retning klient
+S1(config-if)# spanning-tree portfast
+S1(config-if)# spanning-tree bpduguard enable
+
+conf t
+spanning-tree vlan 1,10,99 root secondary
+spanning-tree mode rapid-pvst
+interface f0/6
+spanning-tree portfast
+spanning-tree bpduguard enable
+end
+
+---------
+
+S3(config)# spanning-tree mode rapid-pvst
+S3(config)# interface f0/18               interface retning klient
+S3(config-if)# no shutdown
+S3(config-if)# spanning-tree portfast
+S3(config-if)# spanning-tree bpduguard enable
+
+conf t
+spanning-tree mode rapid-pvst
+interface f0/18
+no shutdown
+spanning-tree portfast
+spanning-tree bpduguard enable
+end
+
+-----------------------------------------------------------------------------
+
+
+
+
+
