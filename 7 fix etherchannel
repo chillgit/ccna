@@ -45,6 +45,7 @@ no shutdown
 end 
 show interfaces trunk 
 show etherchannel summary
+show int po12
 
 -----------------------------------------------------------------------------
 sw trunk allowed vlan 1-1000
