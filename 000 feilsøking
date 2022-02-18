@@ -2,18 +2,18 @@ NB! shut/no shut + cop run st   etter du har gjort endringer!
 
 ACCESS-SWITCH
 
-1
+001
 Check VLANs - Finnes riktige VLAN og er de aktive på riktig port?
 S1#sh(ow) vl(an) b(rief)
 sh vl b
 
-2
+002
 check VLAN, duplex and ports - Sjekk at både switch og PC står på Auto Duplex og Auto Speed. Disse må 
 være like begge steder og de må ha samme hastighet. Hvis en port er i "port err-disabled" gå rett til punkt 5.
 S1#sh(ow) int(erface) st(atus)
 sh int st
 
-3
+003
 Check trunk - Sjekk at trunk bruker dot1Q encapsulation, at riktige vlan er allowed og active, og at 
 begge sider av trunken har samme native VLAN.
 S1#sh(ow) int(erface) t(runk)
@@ -29,12 +29,12 @@ ping loopback address
 ping default gateway (router)
 ping remote server
 
-4
+004
 Check default GW - sjekk at enheten har en default gateway. 
 S1# show ip default-gateway
 show ip default-gateway
 
-5
+005
 check port security
 S1# sh(ow) po(rt-security) i(nterface) f0/5
 eller
@@ -43,20 +43,20 @@ S1# sh(ow) po(rt-security) a(ddress)
 (hvis adressen har vært feil, men nå er rettet opp, må en ta shut + no shut for å oppdatere og åpne linken)
 show port-security
 
-7
+007
 check etherchannel 
 S1# sh(ow) et(herchannel) s(ummary)
 eller
 S1#show etherchannel 1 summary
 show etherchannel summary
 
-8
+008
 check mac address table
 S1#sh mac ad(dress-table)
 (etter ping)
 show mac address-table
 
-9
+009
 Switch# show dhcp lease
 Viser hvilke DHCP lease enheter tilknyttet svitsjen har
 show dhcp lease
@@ -64,57 +64,57 @@ show dhcp lease
 
 RUTER
 
-10
+010
 ping <ip> source <interface>
 sh ip helper
 
-11
+011
 Check VLANs
 R1#sh(ow) vl(an)
 show vlan
 
-12
+012
 check VLAN and ports
 R1#sh in st(atus)
 R1# sh(ow) ip in(terface) br(ief)
 show interface status
 show ip interface brief
 
-13
+013
 Check trunk
 R1#sh(ow) in(terface) t(runk)
 show interface trunk
 
-14
+014
 check routing table
 R1#show ip ro(ute)
 show ip route
 hvis rute mangler, sjekk om ospf er aktivert
 R1#show ip protocols
 
-15
+015
 check access list
 R1#show ac(cess-lists)
 show access-lists
 
-16
+016
 check vrf
 R1#show vrf
 show vrf
 
-17
+017
 check mac address table
 R1#sh arp
 (etter ping)
 show arp
 
-18
+018
 check open ports
 There are several open TCP ports: 22 for SSH, 23 for Telnet, 80 for HTTP, and 443 for HTTPS; as well as UDP port 123 for NTP.
 R1# show control-plane host open-ports
 
 
-19
+019
 telnet/ssh
 
 ssh -l admin 10.10.1.1
