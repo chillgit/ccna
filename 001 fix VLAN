@@ -21,19 +21,35 @@ show vlan bri
 
 Assign VLAN to interface
 
-S1(config)#interface f0/6
+S1(config)#in(terface) f0/6
 S1(config-if)#sw(itchport) m(ode) a(ccess)
 S1(config-if)#sw(itchport) a(ccess) v(lan) 99
 S1(config-if)#end
 S1#sh(ow) v(lan) b(rief)
 
 conf t
-interface e0/0
+interface f0/6
+switchport mode access
+switchport access vlan 99
+end
+show vlan brief
+
+-----------------------------------------------------------------------------
+
+Assign VLAN to multiple interfaces
+
+S1(config)#in(terface) r(ange) f0/2-6
+S1(config-if)#sw(itchport) m(ode) a(ccess)
+S1(config-if)#sw(itchport) a(ccess) v(lan) 99
+S1(config-if)#end
+S1#sh(ow) v(lan) b(rief)
+
+conf t
+interface r f0/2-6
 switchport mode access
 switchport access vlan 1502
 end
 show vlan brief
-
 
 -----------------------------------------------------------------------------
 
